@@ -27,7 +27,7 @@ const load = async () => {
 
   return (
     <div className="container">
-      <h1>Attendance</h1>
+      <h1 className="page-title"> Attendance</h1>
 
       <div style={{ display: "flex", gap: 10 }}>
        <input

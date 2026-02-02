@@ -2,7 +2,26 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  font-family: system-ui;
+ 
   text-align: center;
+}
+.page-title {
+  font-size: 32px;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.page-title::after {
+  content: "";
+  display: block;
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(to right, #0369a1, #38bdf8);
+  margin-top: 6px;
+  border-radius: 6px;
 }
 
 .logo {
@@ -39,4 +58,48 @@
 
 .read-the-docs {
   color: #888;
+}
+/* ===== HEADER ===== */
+
+.top-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.nav-pill {
+  background: #e9f8fb;
+  border: 2px solid #b7ecf4;
+  border-radius: 999px;
+  padding: 10px 24px;
+
+  display: flex;
+  gap: 28px;
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.nav-pill a {
+  text-decoration: none;
+  color: #0f172a;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+ul{
+      marker: none;
+    display: inline-block;
+}
+
+
+.nav-pill a:hover {
+  background: white;
+  color: #0369a1;
+}
+.nav-pill a.active {
+  background: white;
+  color: #0369a1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }

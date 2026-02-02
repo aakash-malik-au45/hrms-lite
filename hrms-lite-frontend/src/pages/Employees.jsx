@@ -28,7 +28,7 @@ export default function Employees() {
 
   return (
     <div className="container">
-      <h1>Employees</h1>
+      <h1 className="page-title"> Employees</h1>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 10 }}>
         {Object.keys(form).map((k) => (

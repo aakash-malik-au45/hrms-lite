@@ -166,11 +166,11 @@ def dashboard_summary(db: Session = Depends(get_db)):
 
     total_employees = db.query(models.Employee).count()
 
-    # Subquery to get max attendance id per employee for today
+    # --- latest attendance per employee today ---
     subq = (
         db.query(
             models.Attendance.employee_id,
-            func.max(models.Attendance.id).label("max_id")
+            func.max(models.Attendance.id).label("max_id"),
         )
         .filter(models.Attendance.date == today)
         .group_by(models.Attendance.employee_id)
@@ -180,25 +180,35 @@ def dashboard_summary(db: Session = Depends(get_db)):
     att_alias = aliased(models.Attendance)
 
     latest_attendance = (
-        db.query(att_alias)
-        .join(subq, and_(
-            att_alias.employee_id == subq.c.employee_id,
-            att_alias.id == subq.c.max_id
-        ))
+        db.query(att_alias, models.Employee)
+        .join(
+            subq,
+            and_(
+                att_alias.employee_id == subq.c.employee_id,
+                att_alias.id == subq.c.max_id,
+            ),
+        )
+        .join(models.Employee)
+        .all()
     )
 
-    present_today = (
-        latest_attendance.filter(att_alias.status == models.AttendanceStatus.PRESENT)
-        .count()
-    )
+    present_today = 0
+    absent_today = 0
+    present_names = []
+    absent_names = []
 
-    absent_today = (
-        latest_attendance.filter(att_alias.status == models.AttendanceStatus.ABSENT)
-        .count()
-    )
+    for att, emp in latest_attendance:
+        if att.status == models.AttendanceStatus.PRESENT:
+            present_today += 1
+            present_names.append(emp.full_name)
+        elif att.status == models.AttendanceStatus.ABSENT:
+            absent_today += 1
+            absent_names.append(emp.full_name)
 
     return {
         "total_employees": total_employees,
         "present_today": present_today,
         "absent_today": absent_today,
+        "present_list": present_names,
+        "absent_list": absent_names,
     }

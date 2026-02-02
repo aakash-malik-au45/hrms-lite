@@ -11,14 +11,26 @@ export default function Dashboard() {
   if (!stats) return <div className="container">Loading...</div>;
 
   return (
-    <div className="container">
-      <h1>Dashboard</h1>
+<div className="container">
+  <h1>Dashboard</h1>
 
-      <div style={{ display: "flex", gap: 16 }}>
-        <div className="card">Total Employees: {stats.total_employees}</div>
-        <div className="card">Present Today: {stats.present_today}</div>
-        <div className="card">Absent Today: {stats.absent_today}</div>
-      </div>
+  <div className="dashboard-grid">
+    <div className="dashboard-tile">
+      <h2>Total Employees</h2>
+      <p>{stats.total_employees}</p>
     </div>
+
+    <div className="dashboard-tile">
+      <h2>Present Today</h2>
+      <p>{stats.present_today}</p>
+    </div>
+
+    <div className="dashboard-tile">
+      <h2>Absent Today</h2>
+      <p>{stats.absent_today}</p>
+    </div>
+  </div>
+</div>
+
   );
 }

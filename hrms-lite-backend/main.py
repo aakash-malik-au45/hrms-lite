@@ -3,7 +3,8 @@ from sqlalchemy.orm import Session
 from datetime import date
 from typing import Optional
 from sqlalchemy import func, distinct
-
+from sqlalchemy import and_, func
+from sqlalchemy.orm import aliased
 
 import models
 import schemas
@@ -165,22 +166,35 @@ def dashboard_summary(db: Session = Depends(get_db)):
 
     total_employees = db.query(models.Employee).count()
 
-    present_today = (
-        db.query(func.count(distinct(models.Attendance.employee_id)))
-        .filter(
-            models.Attendance.date == today,
-            models.Attendance.status == models.AttendanceStatus.PRESENT,
+    # Subquery to get max attendance id per employee for today
+    subq = (
+        db.query(
+            models.Attendance.employee_id,
+            func.max(models.Attendance.id).label("max_id")
         )
-        .scalar()
+        .filter(models.Attendance.date == today)
+        .group_by(models.Attendance.employee_id)
+        .subquery()
+    )
+
+    att_alias = aliased(models.Attendance)
+
+    latest_attendance = (
+        db.query(att_alias)
+        .join(subq, and_(
+            att_alias.employee_id == subq.c.employee_id,
+            att_alias.id == subq.c.max_id
+        ))
+    )
+
+    present_today = (
+        latest_attendance.filter(att_alias.status == models.AttendanceStatus.PRESENT)
+        .count()
     )
 
     absent_today = (
-        db.query(func.count(distinct(models.Attendance.employee_id)))
-        .filter(
-            models.Attendance.date == today,
-            models.Attendance.status == models.AttendanceStatus.ABSENT,
-        )
-        .scalar()
+        latest_attendance.filter(att_alias.status == models.AttendanceStatus.ABSENT)
+        .count()
     )
 
     return {

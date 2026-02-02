@@ -1,45 +1,185 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
+  background-color: #f5f7fb;
+  color: #111827;
+}
+
+/* ===== NAVBAR ===== */
+
 nav {
-  background: #1f2933;
-  padding: 12px;
+  background: linear-gradient(90deg, #0f172a, #1f2933);
+  padding: 14px 40px;
+  display: flex;
+  gap: 28px;
+  align-items: center;
 }
 
 nav a {
-  color: white;
-  margin-right: 16px;
+  color: #e5e7eb;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 15px;
 }
 
-.container {
-  padding: 20px;
+nav a:hover {
+  color: white;
 }
+
+/* ===== LAYOUT ===== */
+
+.container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* ===== CARDS ===== */
 
 .card {
   background: white;
-  padding: 16px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
 }
+
+/* ===== DASHBOARD GRID ===== */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.dashboard-tile {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-tile h2 {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.dashboard-tile p {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ===== FORMS ===== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+input,
+select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* ===== BUTTONS ===== */
 
 button {
   background: #2563eb;
-  color: white;
   border: none;
-  padding: 8px 14px;
-  border-radius: 4px;
+  color: white;
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
 }
 
 button.secondary {
   background: #6b7280;
 }
 
+button.secondary:hover {
+  background: #4b5563;
+}
+
 button.danger {
   background: #dc2626;
+}
+
+button.danger:hover {
+  background: #b91c1c;
+}
+
+/* ===== TABLE ===== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+  background: #f3f4f6;
+}
+
+th,
+td {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 14px;
+}
+
+tbody tr {
+  border-top: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* ===== PAGINATION ===== */
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ===== LIST ===== */
+
+ul {
+  padding-left: 18px;
+}
+
+li {
+  margin-bottom: 6px;
 }

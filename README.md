@@ -16,10 +16,10 @@ The focus of the project is clean architecture, RESTful APIs, database persisten
 ## 🚀 Live Application
 
 Frontend URL:  
-👉 [<ADD AFTER DEPLOYMENT>](https://hrms-litev-6qxadiiq3-aakashs-projects-0fa9f23a.vercel.app/)
+👉 https://hrms-litev-6qxadiiq3-aakashs-projects-0fa9f23a.vercel.app/
 
 Backend API URL:  
-👉 [<ADD AFTER DEPLOYMENT>](https://hrms-lite-1-12ym.onrender.com)
+👉 https://hrms-lite-1-12ym.onrender.com
 
 GitHub Repository:  
 👉 https://github.com/aakash-malik-au45/hrms-lite
